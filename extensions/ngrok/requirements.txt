@@ -1,1 +1,2 @@
 ngrok==0.*
+pyngrok
