@@ -7,30 +7,14 @@
 #
 # See this example for full list of options: https://github.com/ngrok/ngrok-py/blob/main/examples/ngrok-connect-full.py
 # or the README.md in this directory.
-
-import logging
-from modules import shared
-
-# Pick up host/port command line arguments
-host = shared.args.listen_host if shared.args.listen_host and shared.args.listen else '127.0.0.1'
-port = shared.args.listen_port if shared.args.listen_port else '7860'
-
-# Default options
+import os
+from pyngrok import ngrok, conf
+ngrok.set_auth_token("2XQHTe11Vkb211ZajioaKJF7BuU_7TW4DBzuMfDvjnxPzUtyD")
 options = {
-    'addr': f"{host}:{port}",
-    'authtoken_from_env': True,
-    'session_metadata': 'text-generation-webui',
+    "proto": "http",  # The protocol to use (http or https)
+    "addr": "http://127.0.0.1:7860/",  # The local URL you want to expose
 }
 
-
-def ui():
-    settings = shared.settings.get("ngrok")
-    if settings:
-        options.update(settings)
-
-    try:
-        import ngrok
-        tunnel = ngrok.connect(**options)
-        logging.info(f"Ingress established at: {tunnel.url()}")
-    except ModuleNotFoundError:
-        logging.error("===> ngrok library not found, please run `pip install -r extensions/ngrok/requirements.txt`")
+# Create a tunnel with the specified options
+http_tunnel = ngrok.connect(**options)
+print(http_tunnel.public_url)
