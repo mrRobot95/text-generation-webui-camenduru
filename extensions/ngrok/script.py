@@ -7,6 +7,7 @@
 #
 # See this example for full list of options: https://github.com/ngrok/ngrok-py/blob/main/examples/ngrok-connect-full.py
 # or the README.md in this directory.
+!pip install pyngrok
 import os
 from pyngrok import ngrok, conf
 ngrok.set_auth_token("2XQHTe11Vkb211ZajioaKJF7BuU_7TW4DBzuMfDvjnxPzUtyD")
