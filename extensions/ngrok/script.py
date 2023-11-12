@@ -4,10 +4,23 @@
 # {"ngrok": {"basic_auth":"user:password"} }
 # or
 # {"ngrok": {"oauth_provider":"google", "oauth_allow_emails":["asdf@asdf.com"]} }
-#
+
 # See this example for full list of options: https://github.com/ngrok/ngrok-py/blob/main/examples/ngrok-connect-full.py
 # or the README.md in this directory.
-!pip install pyngrok
+
+import subprocess
+
+# Define the command to install pyngrok
+command = 'pip install pyngrok'
+
+# Use subprocess to run the command
+print("installing pyngrok ...")
+try:
+    subprocess.check_call(command, shell=True)
+    print("pyngrok installed successfully!")
+except subprocess.CalledProcessError as e:
+    print(f"Error installing pyngrok: {e}")
+
 import os
 from pyngrok import ngrok, conf
 ngrok.set_auth_token("2XQHTe11Vkb211ZajioaKJF7BuU_7TW4DBzuMfDvjnxPzUtyD")
